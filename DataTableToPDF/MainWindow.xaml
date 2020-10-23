@@ -1,0 +1,45 @@
+﻿<Window x:Class="DataTableToPDF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="MainWindow" Width="800" Height="600" WindowStartupLocation="CenterScreen"
+        >
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <TextBlock Grid.Row="0" Text="ConnectionString"/>
+            <TextBox x:Name="txtCnn" Grid.Row="1" Text="server=.\sql2;database=bdsic;integrated security=sspi"/>
+            <Button Grid.Column="1" Grid.Row="1" Content="Conectar..." Height="18" Click="Button_Click_1"/>
+        </Grid>
+        
+        <Grid x:Name="grdMain" Grid.Row="1" IsEnabled="False">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel>
+                <TextBlock Text="Select"/>
+                <TextBox x:Name="txtQuery" TextWrapping="Wrap" Height="50" AcceptsReturn="True" Text="select top 100 Pro_descricao, Pro_pvenda, Pro_unidade from Produtos"/>
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Carrega Grid" Width="150" HorizontalAlignment="Left" Click="CarregaClick"/>
+                    <Button Content="To PDF" Width="150" HorizontalAlignment="Left" Click="Button_Click"/>
+                </StackPanel>
+                <TextBox x:Name="txtFilter" TextChanged="txtFilter_TextChanged" Visibility="Collapsed"/>
+            </StackPanel>
+            <DataGrid Grid.Row="1" x:Name="dgv" Background="White" Style="{StaticResource StyleDataGrid}" AutoGenerateColumns="True" FontWeight="Normal"/>
+        </Grid>
+    </Grid>
+</Window>
